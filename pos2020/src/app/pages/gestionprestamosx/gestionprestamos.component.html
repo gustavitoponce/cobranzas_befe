@@ -1,0 +1,209 @@
+<!-- /Datos del Cliente -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card m-t-10">
+
+            <div class="card-header vertical-middle">
+                <h3>Cliente
+                    <span class="pull-right">
+                        <button type="button" data-toggle="modal" data-target="#crear-editar"
+                            class="btn btn-secondary btn-circle"><i class="fa fa-search text-themecolor"></i> </button>
+                        <button (click)="establecerClienteDefault()" type="button"
+                            class="btn btn-secondary btn-circle"><i class="fa fa-heart text-themecolor"></i> </button>
+                    </span>
+                </h3>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <dl>
+                            <div *ngIf="operacion.persona.nombre.length > 0" class="animated bounceIn">
+                                <dt>Nombre:</dt>
+                                <dd>{{operacion.persona.nombre}}</dd>
+                            </div>
+                            <div *ngIf="operacion.persona.nombreempresa.length > 0" class="animated bounceIn">
+                                <dt>Empresa:</dt>
+                                <dd>{{operacion.persona.nombreempresa}}</dd>
+                            </div>
+
+                            <div *ngIf="operacion.persona.direccion.length > 0" class="animated bounceIn">
+                                <dt>Direccion:</dt>
+                                <dd>{{operacion.persona.direccion}}</dd>
+                            </div>
+                        </dl>
+
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <dl>
+                            <div *ngIf="operacion.persona.telefono.length > 0" class="animated bounceIn">
+                                <dt>Telefono:</dt>
+                                <dd>{{operacion.persona.telefono}}</dd>
+                            </div>
+                            <div *ngIf="operacion.persona.telefono.length > 0" class="animated bounceIn">
+                                <dt>Correo:</dt>
+                                <dd>{{operacion.persona.correo}}</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Busqueda del cliente
+    <div id="crear-editar" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <input name="valor" #inputPersona (keyup)="buscarPersona( inputPersona.value )" type="text" class="form-control m-r-10" placeholder="Buscar Cliente" autocomplete="off">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal form-material">
+                    <perfect-scrollbar class="form-group grid-busqueda-cliente">
+                        <table class="table table-hover table-bordered breakpoint footable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Telefono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cliente of clientes" class="hand" (click)="seleccionarPersona(cliente)" data-dismiss="modal">
+                                    <td>{{ cliente.id }}</td>
+                                    <td>{{ cliente.nombre }}</td>
+                                    <td>{{ cliente.telefono }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+
+            </div>
+           
+        </div>
+       
+    
+    </div> -->
+
+</div>
+
+
+<!-- /Datos del Prestamo -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card m-t-10">
+
+            <div class="card-header vertical-middle">
+                <h3>Prestamo </h3>
+            </div>
+
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-6 d-inline-block">
+                        <label for="tipo" class="">Tipo de Prestamo</label>
+                        <select [(ngModel)]="prestamo.tipo" name="tipos" class="form-control form-control-line"
+                            required>
+                            <option [ngValue]="" selected>
+                                Seleccionar
+                            </option>
+                            <option [ngValue]="tipos.tipo" *ngFor="let tipos of tiposCreditos">
+                                {{tipos.value}}
+                            </option>
+
+                        </select>
+                    </div>
+                    <div class="col-6 d-inline-block">
+                        <div class="">
+                            <label for="importe" class="">Importe</label>
+                            <input id="importe" [(ngModel)]="prestamo.importe" name="importe" type="number"
+                                class="form-control" placeholder="importe" autocomplete="off" required min="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6 d-inline-block">
+                        <div class="">
+                            <label for="cuotas" class="">Cuotas</label>
+                            <input [(ngModel)]="prestamo.cuotas" id='_cuotas' name="cuotas" type="number" id='cuotas'
+                                class="form-control" placeholder="Cuotas" autocomplete="off" required min="1">
+                        </div>
+                    </div>
+                    <div class="col-6 d-inline-block">
+                        <div class="">
+                            <label for="interes" class="">Tasa Interes Mensual</label>
+                            <input [(ngModel)]="prestamo.tasa" name="interes" type="number" class="form-control"
+                                placeholder="Interes" autocomplete="off" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6 d-inline-block">
+                        <div class="">
+                            <label for="zona" class="">Elija Zona</label>
+                            <select [(ngModel)]="prestamo.zona" name="zona" class="custom-select col-12">
+                                <option [ngValue]="" selected> Seleccionar </option>
+                                <option [ngValue]="emp.id" *ngFor="let emp of zonas"> {{ emp.nombre }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mt-5">
+                    <!-- <button type="button "  class="btn btn-info btn-rounded mr-3" data-toggle="modal"
+                        data-target="#muestra-simulacion" (click)="crear_grilla(4,100)"  >
+                        Simular
+                    </button> -->
+                    <button type="button" (click)="crear_grilla()" class="btn btn-info btn-rounded mr-3">
+                        Simular
+                    </button>
+                    <button type="button " (click)='resetearSimulacion()' class="btn btn-info btn-rounded"
+                        data-toggle="modal">
+                        Nueva Simulacion
+                    </button>
+                    <button type="button " (click)='guardar()' class="btn btn-info btn-rounded" data-toggle="modal">
+                        Grabar
+                    </button>
+                </div>
+
+                <!-- <select [(ngModel)]="empresa" name="empresa" class="custom-select col-12" >
+                        <option *ngFor="let emp of empresas" [ngValue] = "emp" > {{ emp.nombre }}</option> 
+               </select>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card m-t-10">
+
+            <div class="card-header vertical-middle">
+                <h3>Prestamo </h3>
+            </div>
+
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-6 d-inline-block">
+                        <form name="myForm">
+                            <p>Name:
+                                <input name="myName" ng-model="myName" required>
+                                <span ng-show="myForm.myName.$touched && myForm.myName.$invalid">The name is
+                                    required.</span>
+                            </p>
+
+                            <p>Address:
+                                <input name="myAddress" ng-model="myAddress" required>
+                            </p>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

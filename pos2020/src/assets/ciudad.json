@@ -1,0 +1,132 @@
+[
+    {
+        "pais": "Italia",
+        "provincia": "Roma",
+        "ciudad": "Fiumicino"
+    },
+    {
+        "pais": "Italia",
+        "provincia": "Roma",
+        "ciudad": "Roma"
+    },
+    {
+        "pais": "Italia",
+        "provincia": "Roma",
+        "ciudad": "Tívoli"
+    },
+    {
+        "pais": "Italia",
+        "provincia": "Milán",
+        "ciudad": "Milán"
+    },
+    {
+        "pais": "Argentina",
+        "provincia": "Buenos Aires",
+        "ciudad": "La Plata"
+    },
+    {
+        "pais": "Argentina",
+        "provincia": "Buenos Aires",
+        "ciudad": "Olavarría"
+    },
+    {
+        "pais": "México",
+        "provincia": "Yucatán",
+        "ciudad": "Mérida"
+    },
+    {
+        "pais": "México",
+        "provincia": "Sonora",
+        "ciudad": "Ciudad Obregón"
+    },
+    {
+        "pais": "México",
+        "provincia": "Sonora",
+        "ciudad": "Hermosillo"
+    },
+    {
+        "pais": "México",
+        "provincia": "Sonora",
+        "ciudad": "Agua Prieta"
+    },
+    {
+        "pais": "México",
+        "provincia": "Quintana Roo",
+        "ciudad": "Cancún"
+    },
+    {
+        "pais": "Italia",
+        "provincia": "Pesaro y Urbino",
+        "ciudad": "Pesaro"
+    },
+    {
+        "pais": "Venezuela",
+        "provincia": "Lara",
+        "ciudad": "Barquisimeto"
+    },
+    {
+        "pais": "México",
+        "provincia": "Aguascalientes",
+        "ciudad": "Aguascalientes"
+    },
+    {
+        "pais": "Panamá",
+        "provincia": "Panamá",
+        "ciudad": "San Miguelito "
+    },
+    {
+        "pais": "Uruguay",
+        "provincia": "Paysandú",
+        "ciudad": "Paysandú "
+    },
+    {
+        "pais": "USA",
+        "provincia": "Texas",
+        "ciudad": "Houston"
+    },
+    {
+        "pais": "Panamá",
+        "provincia": "Panamá",
+        "ciudad": "Panamá"
+    },
+    {
+        "pais": "Panamá",
+        "provincia": "Veraguas",
+        "ciudad": "Santiago"
+    },
+    {
+        "pais": "Panamá",
+        "provincia": "Chiriquí",
+        "ciudad": "David"
+    },
+    {
+        "pais": "Argentina",
+        "provincia": "Buenos Aires",
+        "ciudad": "Bahía Blanca"
+    },
+    {
+        "pais": "Argentina",
+        "provincia": "Buenos Aires",
+        "ciudad": "Azul"
+    },
+    {
+        "pais": "Argentina",
+        "provincia": "Tierra del Fuego",
+        "ciudad": "Ushuaia"
+    },
+    {
+        "pais": "Argentina",
+        "provincia": "Misiones",
+        "ciudad": "Posadas"
+    },
+    {
+        "pais": "USA",
+        "provincia": "Florida",
+        "ciudad": "Miami"
+    },
+    {
+        "pais": "USA",
+        "provincia": "California",
+        "ciudad": "Los Ángeles"
+    }
+]

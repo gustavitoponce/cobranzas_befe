@@ -1,0 +1,176 @@
+<div class="card-body form-horizontal form-material ng-pristine ng-invalid ng-touched">
+  <!-- <form [formGroup]="form" (ngSubmit)="submit()" class="form-horizontal form-material" autocomplete="off">-->
+  <div class="form-group row">
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+      <div class="card">
+        <div class="card-body text-center">
+          <h4 class="card-title">Fotografía de Cliente</h4>
+          <h6 class="card-subtitle"> En esta seccion podras seleccionar una nueva imagen para asociar al cliente</h6>
+
+          <img *ngIf="!imagenTemp" [src]="producto.imagen | imagen:'producto'" class="w150">
+          <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
+          <br><br>
+          <input (change)="seleccionImage($event.target.files[0])" type="file">
+          <!--
+                        <br><br>
+
+                        <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button"
+                            class="btn btn-block btn-outline-info waves-effect waves-light m-r-10">
+                            <i class="fa fa-save"></i>
+                            Cargar Foto
+                        </button>-->
+        </div>
+      </div>
+      <!--
+                <div class="card">
+                    <div class="card-body">
+                        <div class="m-t-30 text-center">
+                            <img (click)="mostrarModal( producto.id )" [src]="producto.imagen | imagen:'producto'"
+                                class="img-circle" width="250" />
+                            <h4 class="card-title m-t-10">{{producto.nombre}}</h4>
+                            <h6 class="card-subtitle">{{producto.codigo}}</h6>
+                            <div class="row text-center justify-content-md-center">
+                                <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i>
+                                        <div class="font-medium">254</div>
+                                    </a></div>
+                                <div class="col-4"><a href="javascript:void(0)" class="link"><i
+                                            class="icon-picture"></i>
+                                        <div class="font-medium">54</div>
+                                    </a></div>
+                            </div>
+                            <div class="card-body justify-content-md-center">
+                                <h5 class="card-title  text-center text-danger">Porcentaje de Utilidad Sugerido</h5>
+                                <h5 class="card-title  text-center text-danger">{{ porcentajeUtilidadSugerida }} % </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                </div>-->
+    </div>
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="nombre" class="col-12">Nombre</label>
+                <div class="col-12">
+                  <input [(ngModel)]="persona.nombre" name="nombre" type="text" class="form-control"
+                     autocomplete="off" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="nombre" class="col-12">Empresa</label>
+                <div class="col-12">
+                  <input [(ngModel)]="persona.nombreempresa" name="nombreempresa" type="text" class="form-control"
+                    autocomplete="off">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="nombre" class="col-12">Tipo</label>
+                <div class="col-12">
+                  <select [(ngModel)]="persona.tipo" name="tipo" class="form-control form-control-line" required>
+                    <option [ngValue]="null" selected="">
+                      Seleccionar Tipo
+                    </option>
+                    <option [ngValue]="tipo.value" *ngFor="let tipo of tiposPersona">
+                      {{tipo.text}}
+                    </option>
+
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="nombre" class="col-12">Status</label>
+                <div class="col-12">
+                  <input id="estatus" [(ngModel)]="persona.estatus" name="estatus" type="checkbox"
+                    class="chk-col-light-green" checked="">
+                  <label for="estatus"> Estatus</label>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="nombre" class="col-12">Pais</label>
+                <div class="col-12">
+                  <select name="selPais" id="selPais" class="form-control" (change)="onSelectPais($event.target.value)">
+                    <option value="0">Seleccion Pais
+                    </option>
+                    <option *ngFor="let p of paises |unique |orderBy" [value]="p">{{p.descripcion}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="nombre" class="col-12">Provincia</label>
+                <div class="col-12">
+                  <select name="selProvincia" id="selProvincia" class="form-control"
+                    (change)="onSelectProvincia($event.target.value)">
+                    <option value="0">Selecciona Provincia</option>
+                    <option *ngFor="let p of provincias | unique | orderBy" [value]="p">{{p}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="nombre" class="col-12">Localidad</label>
+                <div class="col-12">
+                  <select name="selCiudad" id="selCiudad" class="form-control">
+                    <option value="0">Selecciona Localidad
+                    </option>
+                    <option *ngFor="let c of ciudades | orderBy" [value]="c">{{c}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="nombre" class="col-12">Direccion</label>
+                <div class="col-12">
+                  <input [(ngModel)]="persona.direccion" name="direccion" type="text" class="form-control"
+                     autocomplete="off">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="nombre" class="col-12">Telefono</label>
+                <div class="col-12">
+                  <input [(ngModel)]="persona.telefono" name="telefono" type="text" class="form-control"
+                     autocomplete="off">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="nombre" class="col-12">Email</label>
+                <div class="col-12">
+                  <input [(ngModel)]="persona.correo" name="correo" type="email" class="form-control"
+                     autocomplete="off">
+                </div>
+              </div>
+
+              <div *ngIf="persona.tipo === 'Cliente'" class="col-md-12 m-b-20 animated fadeIn">
+                <input id="esPersonaVentaPublico" [(ngModel)]="persona.esPersonaVentaPublico"
+                  name="esPersonaVentaPublico" type="checkbox" class="chk-col-light-green">
+                <label for="esPersonaVentaPublico"> Default para
+                  Ventas</label>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+        <div class="card-footer">
+          <div class="form-group row">
+            <div class="col-md-12">
+              <button class="btn btn-info btn-rounded btn-md" type="submit"><span
+                  *ngIf="!esNuevo">Acutalizar</span><span *ngIf="esNuevo">Guardar</span></button>
+              <!-- [attr.disabled]="!form.valid ? '': null" -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!--</form>-->
+</div>

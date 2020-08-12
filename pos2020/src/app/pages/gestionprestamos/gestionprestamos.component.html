@@ -1,0 +1,307 @@
+<!-- /Datos del Cliente -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card m-t-10">
+
+            <div class="card-header vertical-middle">
+                <h3>Cliente
+                    <span class="pull-right">
+                        <button type="button" data-toggle="modal" data-target="#crear-editar"
+                            class="btn btn-secondary btn-circle"><i class="fa fa-search text-themecolor"></i> </button>
+                        <button (click)="establecerClienteDefault()" type="button"
+                            class="btn btn-secondary btn-circle"><i class="fa fa-heart text-themecolor"></i> </button>
+                    </span>
+                </h3>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <dl>
+                            <div *ngIf="operacion.persona.nombre.length > 0" class="animated bounceIn">
+                                <dt>Nombre:</dt>
+                                <dd>{{operacion.persona.nombre}}</dd>
+                            </div>
+                            <div *ngIf="operacion.persona.nombreempresa.length > 0" class="animated bounceIn">
+                                <dt>Empresa:</dt>
+                                <dd>{{operacion.persona.nombreempresa}}</dd>
+                            </div>
+
+                            <div *ngIf="operacion.persona.direccion.length > 0" class="animated bounceIn">
+                                <dt>Direccion:</dt>
+                                <dd>{{operacion.persona.direccion}}</dd>
+                            </div>
+                        </dl>
+
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <dl>
+                            <div *ngIf="operacion.persona.telefono.length > 0" class="animated bounceIn">
+                                <dt>Telefono:</dt>
+                                <dd>{{operacion.persona.telefono}}</dd>
+                            </div>
+                            <div *ngIf="operacion.persona.telefono.length > 0" class="animated bounceIn">
+                                <dt>Correo:</dt>
+                                <dd>{{operacion.persona.correo}}</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="crear-editar" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <input name="valor" #inputPersona (keyup)="buscarPersona( inputPersona.value )" type="text"
+                    class="form-control m-r-10" placeholder="Buscar Cliente" autocomplete="off">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal form-material">
+                    <perfect-scrollbar class="form-group grid-busqueda-cliente">
+                        <table class="table table-hover table-bordered breakpoint footable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Telefono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cliente of clientes" class="hand" (click)="seleccionarPersona(cliente)"
+                                    data-dismiss="modal">
+                                    <td>{{ cliente.id }}</td>
+                                    <td>{{ cliente.nombre }}</td>
+                                    <td>{{ cliente.telefono }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!--Datos del prestamo-->
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card m-t-12">
+
+            <div class="card-header vertical-middle">
+                <h3>Prestamo </h3>
+            </div>
+
+            <div class="card-body">
+                <form [formGroup]='formulario' (submit)='onSubmit(formulario)'>
+
+                    <div class="form-group">
+                        <label for="tipo" class="">Tipo de Prestamo</label>
+                        <select formControlName='tipos' name="tipos" class="custom-select col-12"
+                            required>
+                            <option [ngValue]="" selected> Seleccionar </option>
+                            <option [ngValue]="tipos.tipo" *ngFor="let tipos of tiposCreditos">
+                                {{tipos.value}}
+                            </option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for='importe'>Importe</label>
+                        <input   formControlName='importe' type='number' name="importe" id='importe' class='form-control'>
+                        <div class='errorcodigo' *ngIf="formulario.controls.importe.errors">El campo es obligatorio</div>
+                        <div class='errorcodigo' *ngIf="formulario.controls.importe.value<1500">El campo es obligatorio</div>
+                    </div>
+                   
+                   <div class="form-group">
+                        <label for='tasa'>Tasa de Interes</label>
+                        <input formControlName='tasa' type='number' name="tasa" id='tasa' class='form-control'>
+                        <div class='errorcodigo' *ngIf="formulario.controls.tasa.errors">El campo es obligatorio</div>
+                    </div>
+                    <div class="form-group">
+                        <label for='cuotas'>Cuotas</label>
+                        <input formControlName='cuotas' name="cuotas" id='cuotas' type='number' class='form-control'>
+                        <div class='errorcodigo' *ngIf="formulario.controls.tasa.errors">El campo es obligatorio</div>
+                        <div class='errorcodigo' *ngIf="formulario.controls.cuotas.value<4">Cant Minima de cuotas es 4</div>  
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="zona" class="">Elija Zona</label>
+                        <select forControlName="zona" name ='zona' id='zona'class="custom-select col-12">
+                            <option [ngValue]="" selected> Seleccionar </option>
+                            <option [ngValue]="emp.id" *ngFor="let emp of zonas"> {{ emp.nombre }}</option>
+                        </select>
+                    </div>
+
+                   
+                </form>
+            </div>
+            <div class="card-footer">
+
+                <button   class="btn btn-secondary" data-toggle="modal" data-target="#crear-editar-imagen" (click)="cargarDocumentos(  )">
+                    Documentacion
+                </button>
+                <button type="button " (click)='guardar()' class="btn btn-info btn-rounded"  data-toggle="modal">
+                    Grabar
+                </button>
+                <button class="btn btn-secondary">
+                    Agregar
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    
+
+    <!--Listado de Documentacion   class="modal fade in"-->
+
+<div id="crear-editar-imagen" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+       
+        <div class="row">
+            <div       class="col-md-6 col-xs-20 text-right">
+                <div class="card">
+                    <div class="card-body">
+                  <!-- <input type="text" #input (keyup)="buscarProductos( input.value )"-->
+                            class="form-control form-control-line" placeholder="Buscar Producto"> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12 text-md-right text-lg-right">
+                <div class="card">
+                    <div class="card-body">
+                 
+                        <button   class="btn btn-secondary" data-toggle="modal" data-target="#crear-editar-imagen1" >
+                            Nueva Documentacion <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row animated fadeIn">
+            <div class="col-12">
+                <div class="card" id="print-section">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12 p-r-40">
+                                <h3 class="card-title">Productos registrados (
+                                    <small>{{ productos.length }}</small> )</h3>
+                            </div>
+                            <div class="col-md-6 col-xs-12 text-md-right text-lg-right p-r-40 p-r-40">
+                             <!--    <input id="incluirInactivos" (click)="cargarProductos()"-->
+                                    [(ngModel)]="incluirInactivos" name="incluirInactivos" type="checkbox"
+                                    class="chk-col-light-green" checked="">
+                                <label for="incluirInactivos">Ver Inactivos</label>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover stylish-table" data-page-size="10">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Imagen</th>
+                                        <th>Nombre</th>
+                                        
+                                        <th class="text-center">Estatus</th>
+                                        <th class="text-center">Ultima<br>Modificación</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let doc of docus ; index as i"
+                                        [ngClass]="{'footable-even': (i % 2 == 0), 'footable-odd': (i % 2 != 0)}"
+                                        class="animated bounceIn">
+                                        <td>{{ doc.id }}</td>
+                                        <td>
+                                                  <img (click)="mostrarModal( doc.id )"
+                                                [src]=" doc.imagen | imagen:'producto'"
+                                                class="img-50 img-circle pointer ">
+                                        </td>
+                      
+                                     
+                                        <td> {{ doc.nombre }}</td>
+                                    
+                                        <td class="text-center">
+                                            <span class="label label-shadow"
+                                                [ngClass]="{'label-light-success': doc.estatus, 'label-light-danger': !doc.estatus}">
+                                                <span *ngIf="doc.estatus">Activo</span>
+                                                <span *ngIf="!doc.estatus">Inactivo</span>
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="mytooltip tooltip-effect-3">
+                                                <span class="">
+                                                    <i class="fa fa-info-circle text-info fa-2x"></i>
+                                                </span>
+                                                <span class="tooltip-content p-l-30">
+                                                    <span class="tooltip-text p-l-20">
+                                                        Fecha Modificacion:
+                                                        {{ doc.fechamodificacion | date:'dd/MM/yyyy, h:mm a' }}
+                                                        <br>
+                                                        Usuario: {{doc.usuariomodificacion.nombre}}
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                             
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="7 ">
+                                            <div class="text-right ">
+                                                <ul class="pagination "> </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+</div> 
+                      
+<div id="crear-editar-imagen1" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+<h3>PRUEBA</h3>
+    </div>
+
+
+</div>
+
+</div> 

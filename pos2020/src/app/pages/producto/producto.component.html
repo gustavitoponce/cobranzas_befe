@@ -1,0 +1,179 @@
+<div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form-horizontal form-material" autocomplete="off">
+        <div class="form-group row">
+            <div class="col-lg-4 col-xlg-3 col-md-5">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Fotografía de Producto</h4>
+                        <h6 class="card-subtitle"> En esta seccion podras seleccionar la imagen que quieres asociar al
+                            producto </h6>
+
+                        <img *ngIf="!imagenTemp" [src]="producto.imagen | imagen:'producto'" class="w150">
+                        <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
+                        <br><br>
+                        <input (change)="seleccionImage($event.target.files[0])" type="file">
+
+                        <br><br>
+
+                        <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button"
+                            class="btn btn-block btn-outline-info waves-effect waves-light m-r-10">
+                            <i class="fa fa-save"></i>
+                            Cargar Foto
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Codigo de Barra de Producto</h4>       
+                                
+                        <ngx-barcode [bc-value]="barcode" [bc-display-value]="true"></ngx-barcode>                        
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <div class="m-t-30 text-center">
+                            <img (click)="mostrarModal( producto.id )" [src]="producto.imagen | imagen:'producto'"
+                                class="img-circle" width="250" />
+                            <h4 class="card-title m-t-10">{{producto.nombre}}</h4>
+                            <h6 class="card-subtitle">{{producto.codigo}}</h6>
+                            <div class="row text-center justify-content-md-center">
+                                <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i>
+                                        <div class="font-medium">254</div>
+                                    </a></div>
+                                <div class="col-4"><a href="javascript:void(0)" class="link"><i
+                                            class="icon-picture"></i>
+                                        <div class="font-medium">54</div>
+                                    </a></div>
+                            </div>
+                            <div class="card-body justify-content-md-center">
+                                <h5 class="card-title  text-center text-danger">Porcentaje de Utilidad Sugerido</h5>
+                                <h5 class="card-title  text-center text-danger">{{ porcentajeUtilidadSugerida }} % </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-xlg-9 col-md-7">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-12">Codigo <span
+                                            *ngIf="form.controls['codigo'].errors?.codigo_existente"
+                                            class="form-control-feedback text-danger p-l-20 animated fadeIn"><small>El
+                                                codigo ya existe</small></span></label>
+                                    <div class="col-12">
+                                        <input formControlName="codigo" [attr.disabled]="!esNuevo ? '': null"
+                                            name="codigo" #codigo class="form-control form-control-line">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombre" class="col-12">Codigo de Barra</label>
+                                    <div class="col-12">
+                                        <!--<input class="form-control form-control-line" formControlName="barcode"
+                                            name="barcode" id="barcode">-->
+                                        <input class="form-control form-control-line" [(ngModel)]="barcode" [ngModelOptions]="{standalone: true}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombre" class="col-12">Nombre</label>
+                                    <div class="col-12">
+                                        <input class="form-control form-control-line" formControlName="nombre"
+                                            name="nombre" id="nombre">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcion" class="col-12">Descripción</label>
+                                    <div class="col-12">
+                                        <input type="text" class="form-control form-control-line"
+                                            formControlName="descripcion" name="descripcion" id="descripcion">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="costo" class="col-12">Costo</label>
+                                    <div class="col-12">
+                                        <input appEntradaMoneda type="number" (keyup)="entrada($event)"
+                                            class="form-control form-control-line" formControlName="costo" name="costo"
+                                            id="costo">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="precio" class="col-12">Precio de Venta</label>
+                                    <div class="col-12">
+                                        <input appEntradaMoneda type="number" class="form-control form-control-line"
+                                            formControlName="precio" name="precio" id="precio">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+
+                                <div class="form-group">
+                                    <label for="stockminimo" class="col-12">Stock Minimo</label>
+                                    <div class="col-12">
+                                        <input type="number" class="form-control form-control-line"
+                                            formControlName="stockminimo" name="stockminimo" id="stockminimo" min="0">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12">Unidad</label>
+                                    <div class="col-sm-12">
+                                        <select formControlName="unidad" name="unidad"
+                                            class="form-control form-control-line">
+                                            <option value="null">Seleccionar</option>
+                                            <option *ngFor="let unidad of unidades" [ngValue]="unidad.id">
+                                                {{unidad.codigo}} - {{ unidad.descripcion }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12">Marca</label>
+                                    <div class="col-sm-12">
+                                        <select formControlName="marca" name="marca"
+                                            class="form-control form-control-line">
+                                            <option [ngValue]="null">Seleccionar</option>
+                                            <option *ngFor="let marca of marcas" [ngValue]="marca.id">{{marca.nombre}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12">Categoria</label>
+                                    <div class="col-sm-12">
+                                        <select formControlName="categoria" name="categoria"
+                                            class="form-control form-control-line">
+                                            <option [ngValue]="null">Seleccionar</option>
+                                            <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+                                                {{categoria.nombre}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group p-l-20">
+                                    <input id="estatus" formControlName="estatus" name="estatus" type="checkbox"
+                                        class="chk-col-light-green" checked="">
+                                    <label for="estatus"> Estatus</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <button [attr.disabled]="!form.valid ? '': null" class="btn btn-info btn-rounded btn-md"
+                                    type="submit"><span *ngIf="!esNuevo">Acutalizar</span><span
+                                        *ngIf="esNuevo">Guardar</span></button>
+                                <!-- [attr.disabled]="!form.valid ? '': null" -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

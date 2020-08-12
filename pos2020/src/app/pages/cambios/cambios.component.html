@@ -1,0 +1,95 @@
+<h3 class="card-title">Prestamos registrados ( <small>{{ prestamos.length }}</small> )</h3>
+<div class="table-responsive">
+    <table class="table table-hover stylish-table" data-page-size="10">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Cant Cuotas</th>
+                <!-- <th>Empresa</th> -->
+                <!-- <th class="uk-hidden-small">Direccion</th> -->
+                <th>Importe</th>
+                <th>Nro Prestamo</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let per of prestamos" class="animated fadeIn">
+                <td>{{ per.cliente.nombre }}</td>
+                <td>{{ per.cuotas }}</td>
+                <td>{{ per.importe }}</td>
+                <td>{{ per.id }}</td>
+                <td class="text-center">
+                    <span class="label label-shadow"
+                        [ngClass]="{'label-light-success': per.estado.descripcion==='P', 'label-light-danger': per.estado.descripcion==='A', 'badge badge-warning': per.estado.descripcion==='R', 'badge badge-info': per.estado.descripcion==='E' }">
+                        <span *ngIf="per.estado.descripcion==='P'">Pendiente</span>
+                        <span *ngIf="per.estado.descripcion==='A'">Aprobado</span>
+                        <span *ngIf="per.estado.descripcion==='R'">Rechazado</span>
+                        <span *ngIf="per.estado.descripcion==='E'">Eliminado</span>
+                    </span>
+                </td>
+
+                <td class="text-center" *ngIf="per.estado.descripcion==='A'">
+                    <button (click)="cargarDetalle( per.id )" data-toggle="modal" data-target="#muestra-simulacion"
+                        class="btn btn-info">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                </td>
+<!--<td>
+
+    acordate que es angular 7
+    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
+
+</td>--> 
+                <td class="text-center" *ngIf="per.estado.descripcion==='P'">
+                    <button (click)="cargarDocumentos(per.id  )" data-toggle="modal" data-target="#cambios"
+                        class="btn btn-warning">
+                        <i class="fa fa-save"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+
+
+
+<div id="cambios" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <form [formGroup]="formcambios" (ngSubmit)="submit(idprestamo,formcambios)"
+                class="form-horizontal form-material" autocomplete="off">
+                <div class="form-group">
+                    <label for='importe'>Observaciones para {{ idprestamo }}</label>
+                    <input formControlName='observacion' type='text' name="observacion" id='observacion' class='form-control'>
+                    <div class='errorcodigo' *ngIf="formcambios.controls.observacion.errors">La Observacion es obligatoria</div>
+                    
+                </div>
+
+                <div class="col-6 d-inline-block">
+                    <div class="">
+                        <label for="zona" class="">Elija Zona</label>
+                        <select formControlName='estado' name="estado" id='estado' class="custom-select col-12">
+                            <option [ngValue]="" selected> Seleccionar </option>
+                            <option [ngValue]="emp.id" *ngFor="let emp of estados"> {{ emp.nombre }}</option>
+                        </select>
+                    </div>
+                </div>
+                               <button type="submit" >Cambiar Estado</button>
+            </form>
+        </div>
+
+    </div>
+
+</div>

@@ -71,7 +71,7 @@
             <form [formGroup]="formcambios" (ngSubmit)="submit(idprestamo,formcambios)"
                 class="form-horizontal form-material" autocomplete="off">
                 <div class="form-group">
-                    <label for='importe'>Observaciones para {{ idprestamo }}</label>
+                    <label for='importe'>Observaciones para el prestamo {{ idprestamo }}</label>
                     <input formControlName='observacion' type='text' name="observacion" id='observacion' class='form-control'>
                     <div class='errorcodigo' *ngIf="formcambios.controls.observacion.errors">La Observacion es obligatoria</div>
                     

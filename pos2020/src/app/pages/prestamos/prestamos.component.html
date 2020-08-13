@@ -165,7 +165,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h3 class="card-title">Detalle del Prestamo </h3>
+                                        <h3 class="card-title">Detalle del Prestamo Nro {{detalleprestamo.id}} </h3>
                                     </div>
 
                                 </div>
@@ -243,7 +243,7 @@
                         <div class="card">
                             <div class="card-body text-center">
                                 <h4 class="card-title">Documentos de Prestamos</h4>
-                               
+
 
                                 <img *ngIf="!imagenTemp" [src]="docus1.imagen | imagen:'producto'" class="w150">
                                 <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
@@ -252,23 +252,23 @@
 
                                 <br><br>
 
-                               
+
                             </div>
                             <!--<div class="col-md-12">
                                 <button [attr.disabled]="!formimagen.valid ? '': null" class="btn btn-info btn-rounded btn-md"
                                     type="submit"><span *ngIf="!esNuevo">Acutalizar</span><span
                                         *ngIf="esNuevo">Guardar</span></button>
-                                 [attr.disabled]="!form.valid ? '': null" 
+                                 [attr.disabled]="!form.valid ? '': null"
                             </div> -->
 
                             <div class="col-md-12">
-                                <button 
+                                <button
                                     type="submit"><span *ngIf="!esNuevo">Acutalizar</span><span
                                         *ngIf="esNuevo">Guardar</span></button>
                                 <!-- [attr.disabled]="!form.valid ? '': null" -->
                             </div>
                         </div>
-                       
+
                     </div>
                     <div class="form-group">
                         <label for="nombre" class="col-12">Nombre</label>
@@ -289,5 +289,5 @@
         </div>
 
     </div>
-    
+
 </div>

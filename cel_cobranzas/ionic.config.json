@@ -1,0 +1,7 @@
+{
+  "name": "cel_cobranzas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
